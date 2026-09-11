@@ -41,7 +41,6 @@
                         radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.12) 0%, transparent 45%),
                         #0f172a;
         }
-        /* Estilos enfocados para el formulario colorido y profesional */
         .form-input-container:focus-within .form-icon {
             color: #6366f1;
             transform: scale(1.1);
@@ -50,10 +49,29 @@
             border-color: #6366f1;
             box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
         }
-        /* Estilos para el select con categorías */
         optgroup {
             font-style: normal;
             padding: 10px;
+        }
+
+        /* Estilos específicos para cuando se imprima la ficha */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #detallesModal, #detallesModal * {
+                visibility: visible;
+            }
+            #detallesModal {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: white !important;
+            }
+            .no-print {
+                display: none !important;
+            }
         }
     </style>
 </head>
@@ -110,35 +128,6 @@
                     <button onclick="irAlLogin()" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-extrabold rounded-2xl text-white bg-indigo-600 hover:bg-indigo-500 shadow-xl shadow-indigo-600/30 transition-all transform hover:-translate-y-0.5 cursor-pointer">
                         Ingresar al Portal Docente <i class="fa-solid fa-arrow-right ml-2.5"></i>
                     </button>
-                    <a href="#requisitos" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 border border-slate-700 text-base font-semibold rounded-2xl text-slate-300 bg-slate-900/40 hover:bg-slate-900/60 transition-all">
-                        Ver Requisitos <i class="fa-solid fa-circle-info ml-2.5"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm transition-all">
-                    <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-award text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Liderazgo Académico</h3>
-                    <p class="text-slate-600 text-sm">Metodologías innovadoras para el desarrollo social e intelectual del estudiante.</p>
-                </div>
-                <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm transition-all">
-                    <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-seedling text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Valores y Convivencia</h3>
-                    <p class="text-slate-600 text-sm">Fomento de la empatía, ética y cuidado ambiental en un ambiente de paz.</p>
-                </div>
-                <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm transition-all">
-                    <div class="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-laptop-code text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Tecnología Aplicada</h3>
-                    <p class="text-slate-600 text-sm">Ecosistema escolar digital eficiente y moderno para facilitar el acceso a la información.</p>
                 </div>
             </div>
         </div>
@@ -190,7 +179,7 @@
                     <thead>
                         <tr class="bg-slate-50 border-b text-xs font-bold uppercase text-slate-500">
                             <th class="px-6 py-4">Alumno</th>
-                            <th class="px-6 py-4">Grado / Año</th>
+                            <th class="px-6 py-4">Grado / Nivel</th>
                             <th class="px-6 py-4">Representante</th>
                             <th class="px-6 py-4 text-right">Acciones</th>
                         </tr>
@@ -210,12 +199,8 @@
             </button>
         </div>
 
-        <!-- Indicador de Progreso Atractivo -->
         <div class="bg-gradient-to-r from-indigo-900 to-indigo-800 rounded-3xl p-8 text-white mb-8 shadow-xl border border-indigo-750">
             <h2 class="text-2xl font-black">Nueva Ficha de Admisión Digital</h2>
-            <div class="w-full bg-indigo-950/60 h-2 rounded-full mt-4">
-                <div class="bg-gradient-to-r from-amber-400 to-emerald-400 h-full w-[100%] rounded-full"></div>
-            </div>
         </div>
 
         <form onsubmit="guardarInscripcion(event)" class="space-y-8">
@@ -239,14 +224,14 @@
                             <option value="Femenino">Femenino</option>
                         </select>
                         
-                        <!-- SELECT CON SEPARADORES POR CATEGORIAS -->
+                        <!-- SELECT ACTUALIZADO CON PRE ESCOLAR -->
                         <select id="alumnoGrado" required class="w-full px-4 py-3.5 border border-slate-200 rounded-xl focus:border-indigo-500 focus:outline-none bg-white">
-                            <option value="">Grado / Año...</option>
-                            <!-- Categoría: Educación Inicial (Kinder) -->
-                            <optgroup label="Educación Inicial (Kinder)" class="font-bold text-indigo-600 bg-indigo-50">
-                                <option value="Kinder - 1er Lapso">Kinder - 1er Lapso</option>
-                                <option value="Kinder - 2do Lapso">Kinder - 2do Lapso</option>
-                                <option value="Kinder - 3er Lapso">Kinder - 3er Lapso</option>
+                            <option value="">Grado / Nivel...</option>
+                            <!-- Categoría: Educación Inicial (Pre Escolar) -->
+                            <optgroup label="Educación Inicial (Pre Escolar)" class="font-bold text-indigo-600 bg-indigo-50">
+                                <option value="Pre Escolar - 1er Nivel">Pre Escolar - 1er Nivel</option>
+                                <option value="Pre Escolar - 2do Nivel">Pre Escolar - 2do Nivel</option>
+                                <option value="Pre Escolar - 3er Nivel">Pre Escolar - 3er Nivel</option>
                             </optgroup>
 
                             <!-- Categoría: Escuela Primaria -->
@@ -289,7 +274,7 @@
         </form>
     </main>
 
-    <!-- VENTANA MODAL: EXPEDIENTE DETALLADO DEL ALUMNO -->
+    <!-- VENTANA MODAL: EXPEDIENTE DETALLADO DEL ALUMNO CON OPCIÓN DE IMPRESIÓN -->
     <div id="detallesModal" class="hidden fixed inset-0 z-[90] flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm overflow-y-auto">
         <div class="bg-white rounded-[32px] max-w-2xl w-full shadow-2xl border border-slate-200 overflow-hidden my-8 fade-in">
             <!-- Encabezado Ficha -->
@@ -298,7 +283,7 @@
                     <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Expediente de Inscripción Escolar</span>
                     <h3 id="detFichaNombre" class="text-2xl font-black mt-1">Nombre Alumno</h3>
                 </div>
-                <button onclick="cerrarDetallesModal()" class="text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2.5 rounded-2xl transition-all">
+                <button onclick="cerrarDetallesModal()" class="no-print text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2.5 rounded-2xl transition-all">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
@@ -310,7 +295,7 @@
                         <i class="fa-solid fa-child"></i> Información del Alumno
                     </h4>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                        <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Grado / Lapso Asignado:</strong> <span id="detGrado" class="font-semibold text-slate-800"></span></p>
+                        <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Grado / Nivel Asignado:</strong> <span id="detGrado" class="font-semibold text-slate-800"></span></p>
                         <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Fecha de Nacimiento:</strong> <span id="detFechaNac" class="font-semibold text-slate-800"></span></p>
                         <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Género:</strong> <span id="detGenero" class="font-semibold text-slate-800"></span></p>
                         <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Fecha de Registro:</strong> <span id="detFechaReg" class="font-semibold text-slate-800"></span></p>
@@ -339,8 +324,11 @@
                 </div>
             </div>
 
-            <!-- Pie de Ficha -->
-            <div class="bg-slate-50 border-t px-8 py-5 flex justify-end">
+            <!-- Pie de Ficha (Con botón de impresión) -->
+            <div class="no-print bg-slate-50 border-t px-8 py-5 flex justify-between items-center">
+                <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-3 rounded-xl transition-all text-sm inline-flex items-center gap-2 shadow-md">
+                    <i class="fa-solid fa-print"></i> Imprimir Ficha
+                </button>
                 <button onclick="cerrarDetallesModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold px-6 py-3 rounded-xl transition-all text-sm">
                     Cerrar Ficha
                 </button>
@@ -373,7 +361,6 @@
     <footer class="bg-white border-t border-slate-200 py-6 mt-auto">
         <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400">
             <p>© 2026 U.E.E Rafael Angel Caridad. Todos los derechos reservados.</p>
-            <p class="mt-1">Datos en la nube de Google Firebase Cloud.</p>
         </div>
     </footer>
 
@@ -382,7 +369,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-        // CONFIGURACIÓN FIREBASE DE TU NUEVO PROYECTO (escuela-kl-14)
         const firebaseConfig = {
             apiKey: "AIzaSyDEr6qNLgWvlbhr-JtR5V2vNQxLep0CtyE",
             authDomain: "escuela-kl-14.firebaseapp.com",
@@ -396,10 +382,8 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Memoria para guardar la lista de alumnos localmente para consulta instantánea
         let listaAlumnosLocal = {};
 
-        // Hacer funciones accesibles desde el HTML global
         window.cambiarVistaAuth = cambiarVistaAuth;
         window.ejecutarRegistro = ejecutarRegistro;
         window.ejecutarLogin = ejecutarLogin;
@@ -534,7 +518,6 @@
             });
             alertCustom("¡Guardado!", "Ficha sincronizada en tiempo real.");
             
-            // Limpia los campos del formulario tras subir la información
             const form = document.querySelector('#seccionFormulario form');
             if(form) form.reset();
             mostrarDashboard();
@@ -559,7 +542,7 @@
                     tbody.innerHTML += `<tr class="border-b hover:bg-slate-50/50 transition-colors">
                         <td class="px-6 py-4 font-bold text-slate-900">${d.apellido}, ${d.nombre}</td>
                         <td class="px-6 py-4">
-                            <span class="inline-flex items-center px-2.5 py-1.5 rounded-lg text-xs font-semibold ${d.grado && d.grado.includes('Kinder') ? 'bg-indigo-50 text-indigo-700' : 'bg-purple-50 text-purple-700'}">
+                            <span class="inline-flex items-center px-2.5 py-1.5 rounded-lg text-xs font-semibold ${d.grado && d.grado.includes('Pre Escolar') ? 'bg-indigo-50 text-indigo-700' : 'bg-purple-50 text-purple-700'}">
                                 ${d.grado}
                             </span>
                         </td>
@@ -577,19 +560,16 @@
             }
         }
 
-        // MOSTRAR EXPEDIENTE DETALLADO DEL ALUMNO EN LA VENTANA MODAL
         function verDetalles(id) {
             const alumno = listaAlumnosLocal[id];
             if (!alumno) return;
 
-            // Rellenar datos escolares y personales del alumno
             document.getElementById('detFichaNombre').innerText = `${alumno.nombre} ${alumno.apellido}`;
             document.getElementById('detGrado').innerText = alumno.grado || 'No especificado';
             document.getElementById('detFechaNac').innerText = formatearFecha(alumno.fechaNac);
             document.getElementById('detGenero').innerText = alumno.genero || 'No especificado';
             document.getElementById('detFechaReg').innerText = alumno.fechaRegistro ? new Date(alumno.fechaRegistro).toLocaleString() : 'No registrada';
 
-            // Rellenar datos del tutor/representante
             document.getElementById('detRepNombre').innerText = alumno.repNombre || 'No especificado';
             document.getElementById('detRepParentesco').innerText = alumno.repParentesco || 'No especificado';
             document.getElementById('detRepTelefono').innerText = alumno.repTelefono || 'No especificado';
