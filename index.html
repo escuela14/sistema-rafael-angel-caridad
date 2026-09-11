@@ -56,34 +56,41 @@
             padding: 10px;
         }
 
-        /* --- CSS DE IMPRESIÓN CORREGIDO --- */
+        /* --- CSS DE IMPRESIÓN OPTIMIZADO Y LIMPIO --- */
         @media print {
             body * {
-                visibility: hidden;
+                visibility: hidden !important;
             }
             #detallesModal, #detallesModal * {
-                visibility: visible;
+                visibility: visible !important;
             }
             #detallesModal {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                height: auto !important;
                 background: white !important;
-                overflow: visible !important; 
+                overflow: visible !important;
+                display: block !important;
+                z-index: 999999 !important;
             }
             #detallesModal > div {
                 max-height: none !important;
+                height: auto !important;
                 box-shadow: none !important;
                 border: none !important;
                 width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
-            .no-print {
-                display: none !important;
-            }
-            #detallesModal .max-h-\[70vh\] {
+            /* Ocultar barra de desplazamiento y elementos innecesarios al imprimir */
+            #detallesModal .overflow-y-auto {
                 max-height: none !important;
                 overflow: visible !important;
+            }
+            .no-print, button, .fa-xmark {
+                display: none !important;
             }
         }
     </style>
@@ -241,7 +248,6 @@
             </button>
         </div>
 
-        <!-- Indicador de Progreso Atractivo -->
         <div class="bg-gradient-to-r from-indigo-900 to-indigo-800 rounded-3xl p-8 text-white mb-8 shadow-xl border border-indigo-750">
             <h2 class="text-2xl font-black">Nueva Ficha de Admisión Digital</h2>
             <div class="w-full bg-indigo-950/60 h-2 rounded-full mt-4">
@@ -275,9 +281,9 @@
                             <option value="">Grado / Año...</option>
                             <!-- Categoría: Educación Inicial (Pre Escolar) -->
                             <optgroup label="Educación Inicial (Pre Escolar)" class="font-bold text-indigo-600 bg-indigo-50">
-                                <option value="Pre Escolar - 1er Lapso">Pre Escolar - 1er Lapso</option>
-                                <option value="Pre Escolar - 2do Lapso">Pre Escolar - 2do Lapso</option>
-                                <option value="Pre Escolar - 3er Lapso">Pre Escolar - 3er Lapso</option>
+                                <option value="Pre Escolar - 1er Nivel">Pre Escolar - 1er Nivel</option>
+                                <option value="Pre Escolar - 2do Nivel">Pre Escolar - 2do Nivel</option>
+                                <option value="Pre Escolar - 3er Nivel">Pre Escolar - 3er Nivel</option>
                             </optgroup>
 
                             <!-- Categoría: Escuela Primaria -->
@@ -341,7 +347,7 @@
                         <i class="fa-solid fa-child"></i> Información del Alumno
                     </h4>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                        <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Grado / Lapso Asignado:</strong> <span id="detGrado" class="font-semibold text-slate-800"></span></p>
+                        <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Grado / Nivel Asignado:</strong> <span id="detGrado" class="font-semibold text-slate-800"></span></p>
                         <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Fecha de Nacimiento:</strong> <span id="detFechaNac" class="font-semibold text-slate-800"></span></p>
                         <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Género:</strong> <span id="detGenero" class="font-semibold text-slate-800"></span></p>
                         <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Fecha de Registro:</strong> <span id="detFechaReg" class="font-semibold text-slate-800"></span></p>
@@ -372,10 +378,10 @@
 
             <!-- Pie de Ficha con Botón de Imprimir -->
             <div class="bg-slate-50 border-t px-8 py-5 flex justify-between items-center no-print">
-                <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl transition-all text-sm inline-flex items-center gap-2 shadow-md">
+                <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl transition-all text-sm inline-flex items-center gap-2 shadow-md cursor-pointer">
                     <i class="fa-solid fa-print"></i> Imprimir Ficha
                 </button>
-                <button onclick="cerrarDetallesModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold px-6 py-3 rounded-xl transition-all text-sm">
+                <button onclick="cerrarDetallesModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold px-6 py-3 rounded-xl transition-all text-sm cursor-pointer">
                     Cerrar Ficha
                 </button>
             </div>
@@ -387,7 +393,7 @@
         <div class="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl text-center border">
             <h3 id="modalTitle" class="text-xl font-black text-slate-900 mb-2"></h3>
             <p id="modalMessage" class="text-slate-500 text-sm mb-6"></p>
-            <button onclick="cerrarCustomModal()" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg">Aceptar</button>
+            <button onclick="cerrarCustomModal()" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg cursor-pointer">Aceptar</button>
         </div>
     </div>
 
@@ -397,8 +403,8 @@
             <h3 class="text-xl font-black text-slate-900 mb-2">¿Estás seguro?</h3>
             <p class="text-slate-500 text-sm leading-relaxed mb-6">Esta acción borrará de forma permanente el registro seleccionado de la nube.</p>
             <div class="flex gap-4">
-                <button onclick="cerrarConfirmModal(false)" class="flex-1 bg-slate-100 text-slate-700 font-bold py-3 rounded-xl">Cancelar</button>
-                <button id="btnConfirmarEliminar" class="flex-1 bg-red-600 text-white font-bold py-3 rounded-xl shadow-lg">Eliminar</button>
+                <button onclick="cerrarConfirmModal(false)" class="flex-1 bg-slate-100 text-slate-700 font-bold py-3 rounded-xl cursor-pointer">Cancelar</button>
+                <button id="btnConfirmarEliminar" class="flex-1 bg-red-600 text-white font-bold py-3 rounded-xl shadow-lg cursor-pointer">Eliminar</button>
             </div>
         </div>
     </div>
@@ -416,7 +422,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-        // CONFIGURACIÓN FIREBASE DE TU NUEVO PROYECTO (escuela-kl-14)
         const firebaseConfig = {
             apiKey: "AIzaSyDEr6qNLgWvlbhr-JtR5V2vNQxLep0CtyE",
             authDomain: "escuela-kl-14.firebaseapp.com",
@@ -430,10 +435,8 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Memoria para guardar la lista de alumnos localmente para consulta instantánea
         let listaAlumnosLocal = {};
 
-        // Hacer funciones accesibles desde el HTML global
         window.cambiarVistaAuth = cambiarVistaAuth;
         window.ejecutarRegistro = ejecutarRegistro;
         window.ejecutarLogin = ejecutarLogin;
@@ -598,10 +601,10 @@
                         </td>
                         <td class="px-6 py-4 text-slate-600">${d.repNombre}</td>
                         <td class="px-6 py-4 text-right space-x-2">
-                            <button onclick="verDetalles('${snap.id}')" class="text-indigo-600 hover:text-indigo-800 font-extrabold transition-colors px-3 py-2 bg-indigo-50 hover:bg-indigo-100 rounded-xl text-xs inline-flex items-center gap-1">
+                            <button onclick="verDetalles('${snap.id}')" class="text-indigo-600 hover:text-indigo-800 font-extrabold transition-colors px-3 py-2 bg-indigo-50 hover:bg-indigo-100 rounded-xl text-xs inline-flex items-center gap-1 cursor-pointer">
                                 <i class="fa-solid fa-eye"></i> Ver Ficha
                             </button>
-                            <button onclick="eliminar('${snap.id}')" class="text-red-500 hover:text-red-700 font-bold transition-colors px-3 py-2 bg-red-50 hover:bg-red-100 rounded-xl text-xs inline-flex items-center gap-1">
+                            <button onclick="eliminar('${snap.id}')" class="text-red-500 hover:text-red-700 font-bold transition-colors px-3 py-2 bg-red-50 hover:bg-red-100 rounded-xl text-xs inline-flex items-center gap-1 cursor-pointer">
                                 <i class="fa-solid fa-trash"></i> Eliminar
                             </button>
                         </td>
